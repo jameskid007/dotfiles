@@ -104,6 +104,7 @@ alias vi="lvim"
 alias vim="lvim"
 alias nvim="lvim"
 alias z="j"
+alias lg="lazygit"
 
 # [[ -s ~/.autojump/etc/profile.d/autojump.sh ]] && . ~/.autojump/etc/profile.d/autojump.sh
 . /usr/share/autojump/autojump.sh
