@@ -140,9 +140,16 @@ lvim.plugins = {
 		cmd = "TroubleToggle",
 	},
   {
+    "lewis6991/gitsigns.nvim",
+		event = "BufRead",
+    config = function ()
+      require('gitsigns').setup()
+    end,
+  },
+  {
     "nvim-treesitter",
 		event = "BufRead",
-    config = function () 
+    config = function ()
     require('nvim-treesitter.configs').setup({
         -- 支持的语言
         ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "c", "cpp", "python"},
