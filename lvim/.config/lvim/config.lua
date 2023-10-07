@@ -115,6 +115,12 @@ linters.setup({
     args = { "--severity", "warning" },
   },
 })
+local code_actions = require "lvim.lsp.null-ls.code_actions"
+code_actions.setup {
+  {
+    name = "proselint",
+  },
+}
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 
