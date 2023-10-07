@@ -100,79 +100,99 @@ lvim.builtin.treesitter.auto_install = true
 -- -- linters and formatters <https://www.lunarvim.org/docs/languages#lintingformatting>
 local formatters = require("lvim.lsp.null-ls.formatters")
 formatters.setup({
-	{ command = "stylua" },
-	{
-		command = "prettier",
-		extra_args = { "--print-width", "100" },
-		filetypes = { "typescript", "typescriptreact" },
-	},
+  { command = "stylua" },
+  {
+    command = "prettier",
+    extra_args = { "--print-width", "100" },
+    filetypes = { "typescript", "typescriptreact" },
+  },
 })
 local linters = require("lvim.lsp.null-ls.linters")
 linters.setup({
-	{ command = "flake8", filetypes = { "python" } },
-	{
-		command = "shellcheck",
-		args = { "--severity", "warning" },
-	},
+  { command = "flake8", filetypes = { "python" } },
+  {
+    command = "shellcheck",
+    args = { "--severity", "warning" },
+  },
 })
 
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 
 lvim.plugins = {
-	{
-		"phaazon/hop.nvim",
-		event = "BufRead",
-		config = function()
-			require("hop").setup()
-			vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
-			vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
-		end,
-	},
-	{
-		"tpope/vim-surround",
-		-- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
-		-- setup = function()
-		--  vim.o.timeoutlen = 500
-		-- end
-	},
-	{
-		"folke/trouble.nvim",
-		cmd = "TroubleToggle",
-	},
   {
-    "lewis6991/gitsigns.nvim",
-		event = "BufRead",
-    config = function ()
-      require('gitsigns').setup()
+    "phaazon/hop.nvim",
+    event = "BufRead",
+    config = function()
+      require("hop").setup()
+      vim.api.nvim_set_keymap("n", "s", ":HopChar2<cr>", { silent = true })
+      vim.api.nvim_set_keymap("n", "S", ":HopWord<cr>", { silent = true })
     end,
   },
   {
+    "tpope/vim-surround",
+    -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
+    -- setup = function()
+    --  vim.o.timeoutlen = 500
+    -- end
+  },
+  {
+    "folke/trouble.nvim",
+    cmd = "TroubleToggle",
+  },
+  {
+    "f-person/git-blame.nvim",
+    event = "BufRead",
+    config = function()
+      vim.cmd "highlight default link gitblame SpecialComment"
+      require("gitblame").setup { enabled = false }
+    end,
+  },
+  {
+    "karb94/neoscroll.nvim",
+    event = "WinScrolled",
+    config = function()
+      require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = { '<C-u>', '<C-d>', '<C-b>', '<C-f>',
+          '<C-y>', '<C-e>', 'zt', 'zz', 'zb' },
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil,       -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,             -- Function to run after the scrolling animation ends
+      })
+    end
+  },
+  {
     "nvim-treesitter",
-		event = "BufRead",
-    config = function ()
-    require('nvim-treesitter.configs').setup({
+    event = "BufRead",
+    config = function()
+      require('nvim-treesitter.configs').setup({
         -- 支持的语言
-        ensure_installed = {"html", "css", "vim", "lua", "javascript", "typescript", "c", "cpp", "python"},
+        ensure_installed = { "html", "css", "vim", "lua", "javascript", "typescript", "c", "cpp", "python", "vue" },
         -- 启用代码高亮
         highlight = {
-            enable = true,
-            additional_vim_regex_highlighting = false
+          enable = true,
+          additional_vim_regex_highlighting = false
         },
         --启用增量选择
         incremental_selection = {
-            enable = true,
-            keymaps = {
-                init_selection = '<CR>',
-                node_incremental = '<CR>',
-                node_decremental = '<BS>',
-                scope_incremental = '<TAB>'
-            }
+          enable = true,
+          keymaps = {
+            init_selection = '<CR>',
+            node_incremental = '<CR>',
+            node_decremental = '<BS>',
+            scope_incremental = '<TAB>'
+          }
         },
         -- 启用基于 Treesitter 的代码格式化(=)
         indent = {
-            enable = true
+          enable = true
         },
-    })
+      })
     end,
   }
 }
