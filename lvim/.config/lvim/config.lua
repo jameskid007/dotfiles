@@ -145,6 +145,7 @@ lvim.plugins = {
     -- end
   },
   {
+    -- 文本插件
     "brooth/far.vim",
   },
   {
