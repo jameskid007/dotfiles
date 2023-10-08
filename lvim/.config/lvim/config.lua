@@ -76,6 +76,7 @@ lvim.builtin.telescope.defaults.mappings = {
 -- -- Additional Plugins <https://www.lunarvim.org/docs/plugins#user-plugins>
 lvim.plugins = {
   {
+    -- 查询文字位置
     "phaazon/hop.nvim",
     event = "BufRead",
     config = function()
@@ -85,10 +86,12 @@ lvim.plugins = {
     end,
   },
   {
+    -- 查看单个历史文件记录插件
     "sindrets/diffview.nvim",
     event = "BufRead",
   },
   {
+    -- 修改括号
     "tpope/vim-surround",
     -- make sure to change the value of `timeoutlen` if it's not triggering correctly, see https://github.com/tpope/vim-surround/issues/117
     -- setup = function()
@@ -100,10 +103,12 @@ lvim.plugins = {
     "brooth/far.vim",
   },
   {
+    -- 错误插件
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
   {
+    -- git 行信息
     "f-person/git-blame.nvim",
     event = "BufRead",
     config = function()
@@ -112,6 +117,7 @@ lvim.plugins = {
     end,
   },
   {
+    -- 平滑滚动
     "karb94/neoscroll.nvim",
     event = "WinScrolled",
     config = function()
@@ -131,6 +137,7 @@ lvim.plugins = {
     end
   },
   {
+    -- 语法高亮
     "nvim-treesitter",
     event = "BufRead",
     config = function()
