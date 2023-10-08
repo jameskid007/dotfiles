@@ -145,6 +145,9 @@ lvim.plugins = {
     -- end
   },
   {
+    "brooth/far.vim",
+  },
+  {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   },
